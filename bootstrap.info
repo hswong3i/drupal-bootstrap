@@ -1,0 +1,5 @@
+name = Bootstrap, from Twitter
+description = Simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions.
+core = 7.x
+dependencies[] = jquery_update
+package = "User interface"
