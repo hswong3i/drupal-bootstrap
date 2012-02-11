@@ -48,3 +48,62 @@ function bootstrap_init() {
   drupal_add_library('bootstrap', 'bootstrap');
   drupal_add_library('bootstrap', 'bootstrap-responsive');
 }
+
+/**
+ * Implements hook_css_alter().
+ */
+function bootstrap_css_alter(&$css) {
+  #unset($css[drupal_get_path('module', 'system') . '/admin.css']);
+  unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+  #unset($css[drupal_get_path('module', 'system') . '/system.admin.css']);
+  #unset($css[drupal_get_path('module', 'system') . '/system.base.css']);
+  #unset($css[drupal_get_path('module', 'system') . '/system.css']);
+  unset($css[drupal_get_path('module', 'system') . '/system.menus.css']);
+  unset($css[drupal_get_path('module', 'system') . '/system.messages.css']);
+  unset($css[drupal_get_path('module', 'system') . '/system.theme.css']);
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function bootstrap_js_alter(&$javascript) {
+  unset($javascript['misc/textarea.js']);
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function bootstrap_theme_registry_alter(&$theme_registry) {
+  if (isset($theme_registry['status_messages'])) {
+    $theme_registry['status_messages']['function'] = 'theme_bootstrap_status_messages';
+    $theme_registry['status_messages']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/theme.inc');
+  }
+  if (isset($theme_registry['breadcrumb'])) {
+    $theme_registry['breadcrumb']['function'] = 'theme_bootstrap_breadcrumb';
+    $theme_registry['breadcrumb']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/theme.inc');
+  }
+
+  // From pager.inc.
+  if (isset($theme_registry['pager'])) {
+    $theme_registry['pager']['function'] = 'theme_bootstrap_pager';
+    $theme_registry['pager']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/pager.inc');
+  }
+
+  // From form.inc.
+  if (isset($theme_registry['button'])) {
+    $theme_registry['button']['function'] = 'theme_bootstrap_button';
+    $theme_registry['button']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/form.inc');
+  }
+  if (isset($theme_registry['textfield'])) {
+    $theme_registry['textfield']['function'] = 'theme_bootstrap_textfield';
+    $theme_registry['textfield']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/form.inc');
+  }
+  if (isset($theme_registry['textarea'])) {
+    $theme_registry['textarea']['function'] = 'theme_bootstrap_textarea';
+    $theme_registry['textarea']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/form.inc');
+  }
+  if (isset($theme_registry['form_element'])) {
+    $theme_registry['form_element']['function'] = 'theme_bootstrap_form_element';
+    $theme_registry['form_element']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/form.inc');
+  }
+}
