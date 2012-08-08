@@ -13,7 +13,7 @@ function bootstrap_library() {
   $libraries['bootstrap'] = array(
     'title' => 'Bootstrap, from Twitter',
     'website' => 'http://twitter.github.com/bootstrap/',
-    'version' => '2.0.0',
+    'version' => '2.0.4',
     'js' => array(
       $path . '/js/bootstrap.min.js' => array(
         'group' => JS_LIBRARY,
@@ -30,7 +30,7 @@ function bootstrap_library() {
   $libraries['bootstrap-responsive'] = array(
     'title' => 'Bootstrap Responsive',
     'website' => 'http://twitter.github.com/bootstrap/',
-    'version' => '2.0.0',
+    'version' => '2.0.4',
     'css' => array(
       $path . '/css/bootstrap-responsive.min.css' => array(
         'group' => CSS_SYSTEM,
@@ -74,6 +74,7 @@ function bootstrap_js_alter(&$javascript) {
  * Implements hook_theme_registry_alter().
  */
 function bootstrap_theme_registry_alter(&$theme_registry) {
+  // includes/theme.inc
   if (isset($theme_registry['status_messages'])) {
     $theme_registry['status_messages']['function'] = 'theme_bootstrap_status_messages';
     $theme_registry['status_messages']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/theme.inc');
@@ -83,13 +84,13 @@ function bootstrap_theme_registry_alter(&$theme_registry) {
     $theme_registry['breadcrumb']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/theme.inc');
   }
 
-  // From pager.inc.
+  // includes/pager.inc
   if (isset($theme_registry['pager'])) {
     $theme_registry['pager']['function'] = 'theme_bootstrap_pager';
     $theme_registry['pager']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/pager.inc');
   }
 
-  // From form.inc.
+  // includes/form.inc
   if (isset($theme_registry['button'])) {
     $theme_registry['button']['function'] = 'theme_bootstrap_button';
     $theme_registry['button']['includes'] = array(drupal_get_path('module', 'bootstrap') . '/includes/form.inc');
